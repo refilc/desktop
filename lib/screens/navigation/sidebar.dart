@@ -8,6 +8,7 @@ import 'package:filcnaplo_desktop_ui/common/panel_button.dart';
 import 'package:filcnaplo_desktop_ui/common/profile_image.dart';
 import 'package:filcnaplo_desktop_ui/screens/navigation/sidebar_action.dart';
 import 'package:filcnaplo_desktop_ui/screens/settings/settings_screen.dart';
+import 'package:filcnaplo_mobile_ui/screens/settings/accounts/account_tile.dart';
 import 'package:filcnaplo_kreta_api/client/client.dart';
 import 'package:filcnaplo_kreta_api/providers/absence_provider.dart';
 import 'package:filcnaplo_kreta_api/providers/event_provider.dart';
@@ -41,6 +42,7 @@ class _SidebarState extends State<Sidebar> {
 
   String topNav = "";
   bool expandAccount = false;
+  List<Widget> accountTiles = [];
 
   @override
   void initState() {
@@ -78,8 +80,10 @@ class _SidebarState extends State<Sidebar> {
         icon: const Icon(FilcIcons.home),
         selected: widget.selected == "home",
         onTap: () {
-          widget.navigator.pushReplacementNamed("home");
-          widget.onRouteChange("home");
+          if (widget.selected != "home") {
+            widget.navigator.pushReplacementNamed("home");
+            widget.onRouteChange("home");
+          }
         },
       ),
       SidebarAction(
@@ -87,8 +91,10 @@ class _SidebarState extends State<Sidebar> {
         icon: const Icon(FeatherIcons.bookmark),
         selected: widget.selected == "grades",
         onTap: () {
-          widget.navigator.pushReplacementNamed("grades");
-          widget.onRouteChange("grades");
+          if (widget.selected != "grades") {
+            widget.navigator.pushReplacementNamed("grades");
+            widget.onRouteChange("grades");
+          }
         },
       ),
       SidebarAction(
@@ -96,8 +102,10 @@ class _SidebarState extends State<Sidebar> {
         icon: const Icon(FeatherIcons.calendar),
         selected: widget.selected == "timetable",
         onTap: () {
-          widget.navigator.pushReplacementNamed("timetable");
-          widget.onRouteChange("timetable");
+          if (widget.selected != "timetable") {
+            widget.navigator.pushReplacementNamed("timetable");
+            widget.onRouteChange("timetable");
+          }
         },
       ),
       SidebarAction(
@@ -105,8 +113,10 @@ class _SidebarState extends State<Sidebar> {
         icon: const Icon(FeatherIcons.messageSquare),
         selected: widget.selected == "messages",
         onTap: () {
-          widget.navigator.pushReplacementNamed("messages");
-          widget.onRouteChange("messages");
+          if (widget.selected != "messages") {
+            widget.navigator.pushReplacementNamed("messages");
+            widget.onRouteChange("messages");
+          }
         },
       ),
       SidebarAction(
@@ -114,8 +124,10 @@ class _SidebarState extends State<Sidebar> {
         icon: const Icon(FeatherIcons.clock),
         selected: widget.selected == "absences",
         onTap: () {
-          widget.navigator.pushReplacementNamed("absences");
-          widget.onRouteChange("absences");
+          if (widget.selected != "absences") {
+            widget.navigator.pushReplacementNamed("absences");
+            widget.onRouteChange("absences");
+          }
         },
       ),
     ];
@@ -134,7 +146,14 @@ class _SidebarState extends State<Sidebar> {
       ),
     ];
 
+    buildAccountTiles();
+
     List<Widget> accountWidgets = [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(children: accountTiles),
+      ),
+
       // Account settings
       PanelButton(
         onPressed: () {
@@ -226,7 +245,7 @@ class _SidebarState extends State<Sidebar> {
                   fillColor: Colors.transparent,
                   animation: primaryAnimation,
                   secondaryAnimation: secondaryAnimation,
-                  transitionType: SharedAxisTransitionType.vertical,
+                  transitionType: SharedAxisTransitionType.scaled,
                   child: child,
                 );
               },
@@ -242,8 +261,6 @@ class _SidebarState extends State<Sidebar> {
             ),
           ),
 
-          const Spacer(),
-
           // Settings
           ...bottomActions,
 
@@ -252,5 +269,36 @@ class _SidebarState extends State<Sidebar> {
         ],
       ),
     );
+  }
+
+  void buildAccountTiles() {
+    accountTiles = [];
+    user.getUsers().forEach((account) {
+      if (account.id == user.id) return;
+
+      String _firstName;
+
+      List<String> _nameParts = user.name?.split(" ") ?? ["?"];
+      if (!settings.presentationMode) {
+        _firstName = _nameParts.length > 1 ? _nameParts[1] : _nameParts[0];
+      } else {
+        _firstName = "Béla";
+      }
+
+      accountTiles.add(AccountTile(
+        name: Text(!settings.presentationMode ? account.name : "Béla", style: const TextStyle(fontWeight: FontWeight.w500)),
+        username: Text(!settings.presentationMode ? account.username : "72469696969"),
+        profileImage: ProfileImage(
+          name: _firstName,
+          backgroundColor: !settings.presentationMode ? ColorUtils.stringToColor(account.name) : Theme.of(context).colorScheme.secondary,
+          role: account.role,
+        ),
+        onTap: () {
+          user.setUser(account.id);
+          restore().then((_) => user.setUser(account.id));
+        },
+        // onTapMenu: () => _showBottomSheet(account),
+      ));
+    });
   }
 }

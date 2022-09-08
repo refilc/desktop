@@ -28,6 +28,7 @@ dependencies:
     git:
       url: https://github.com/filc/flutter_acrylic
       ref: master
+  elegant_notification: ^1.6.1
 
 dev_dependencies:
   flutter_test:

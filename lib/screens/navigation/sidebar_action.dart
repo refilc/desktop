@@ -29,12 +29,13 @@ class SidebarAction extends StatelessWidget {
                 ),
               if (title != null)
                 Padding(
-                  padding: const EdgeInsets.only(left: 14.0),
+                  padding: const EdgeInsets.only(left: 24.0),
                   child: AnimatedDefaultTextStyle(
                     duration: const Duration(milliseconds: 500),
                     style: TextStyle(
                       color: AppColors.of(context).text.withOpacity(selected ? 1.0 : .8),
                       fontWeight: FontWeight.w500,
+                      fontFamily: "Montserrat",
                     ),
                     child: title!,
                   ),

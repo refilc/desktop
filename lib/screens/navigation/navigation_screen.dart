@@ -46,14 +46,17 @@ class NavigationScreenState extends State<NavigationScreen> with WidgetsBindingO
     // Initial sync
     syncAll(context);
 
-    // Transparent sidebar
-    Window.initialize().then((_) async {
+    () async {
+      try {
+        await Window.initialize();
+      } catch (_) {}
       topInset = await Window.getTitlebarHeight();
+      // Transparent sidebar
+      await Window.setEffect(effect: WindowEffect.acrylic);
       await Window.enableFullSizeContentView();
       await Window.hideTitle();
       await Window.makeTitlebarTransparent();
-      await Window.setEffect(effect: WindowEffect.acrylic);
-    });
+    }();
   }
 
   @override
