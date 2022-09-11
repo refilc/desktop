@@ -108,10 +108,15 @@ class NavigationScreenState extends State<NavigationScreen> with WidgetsBindingO
           Expanded(
             child: Container(
               color: Theme.of(context).scaffoldBackgroundColor,
-              child: Navigator(
-                key: _navigatorState,
-                initialRoute: selected.name,
-                onGenerateRoute: (settings) => navigationRouteHandler(settings),
+              child: MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  padding: EdgeInsets.only(top: topInset),
+                ),
+                child: Navigator(
+                  key: _navigatorState,
+                  initialRoute: selected.name,
+                  onGenerateRoute: (settings) => navigationRouteHandler(settings),
+                ),
               ),
             ),
           ),
