@@ -1,5 +1,6 @@
 import 'package:filcnaplo/api/providers/news_provider.dart';
 import 'package:filcnaplo/api/providers/sync.dart';
+import 'package:filcnaplo/theme/colors/colors.dart';
 import 'package:filcnaplo/theme/observer.dart';
 import 'package:filcnaplo_desktop_ui/screens/navigation/navigation_route.dart';
 import 'package:filcnaplo_desktop_ui/screens/navigation/navigation_route_handler.dart';
@@ -95,7 +96,10 @@ class NavigationScreenState extends State<NavigationScreen> with WidgetsBindingO
         children: [
           if (_navigatorState.currentState != null)
             Container(
-              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
+                border: Border(right: BorderSide(color: AppColors.of(context).shadow.withOpacity(.7), width: 1.0)),
+              ),
               child: Padding(
                 padding: EdgeInsets.only(top: topInset),
                 child: Sidebar(
