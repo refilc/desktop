@@ -169,85 +169,83 @@ class _TimetablePageState extends State<TimetablePage> with TickerProviderStateM
                     ?
                     // Week view
                     _tabController.length > 0
-                        ? Expanded(
-                            child: CupertinoScrollbar(
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: _controller.days!.length,
-                                itemBuilder: (context, tab) => SizedBox(
-                                  width: 400,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      // Day Title
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 24.0, right: 28.0, top: 18.0, bottom: 8.0),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              dayTitle(tab).capital(),
-                                              style: const TextStyle(
-                                                fontSize: 32.0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                        ? CupertinoScrollbar(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _controller.days!.length,
+                              itemBuilder: (context, tab) => SizedBox(
+                                width: 400,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Day Title
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 24.0, right: 28.0, top: 18.0, bottom: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            dayTitle(tab).capital(),
+                                            style: const TextStyle(
+                                              fontSize: 32.0,
+                                              fontWeight: FontWeight.w600,
                                             ),
-                                            Text(
-                                              "${_controller.days![tab].first.date.day}".padLeft(2, '0') + ".",
-                                              style: TextStyle(
-                                                color: AppColors.of(context).text.withOpacity(.5),
-                                                fontWeight: FontWeight.w500,
-                                              ),
+                                          ),
+                                          Text(
+                                            "${_controller.days![tab].first.date.day}".padLeft(2, '0') + ".",
+                                            style: TextStyle(
+                                              color: AppColors.of(context).text.withOpacity(.5),
+                                              fontWeight: FontWeight.w500,
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
+                                    ),
 
-                                      // Lessons
-                                      Expanded(
-                                        child: ListView.builder(
-                                          padding: EdgeInsets.zero,
-                                          physics: const BouncingScrollPhysics(),
-                                          itemCount: _controller.days![tab].length + 2,
-                                          itemBuilder: (context, index) {
-                                            if (_controller.days == null) return Container();
+                                    // Lessons
+                                    Expanded(
+                                      child: ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        physics: const BouncingScrollPhysics(),
+                                        itemCount: _controller.days![tab].length + 2,
+                                        itemBuilder: (context, index) {
+                                          if (_controller.days == null) return Container();
 
-                                            // Header
-                                            if (index == 0) {
-                                              return const Padding(
-                                                padding: EdgeInsets.only(top: 8.0, left: 24.0, right: 24.0),
-                                                child: PanelHeader(padding: EdgeInsets.only(top: 12.0)),
-                                              );
-                                            }
-
-                                            // Footer
-                                            if (index == _controller.days![tab].length + 1) {
-                                              return const Padding(
-                                                padding: EdgeInsets.only(bottom: 8.0, left: 24.0, right: 24.0),
-                                                child: PanelFooter(padding: EdgeInsets.only(top: 12.0)),
-                                              );
-                                            }
-
-                                            // Body
-                                            final Lesson lesson = _controller.days![tab][index - 1];
-                                            final bool swapDescDay = _controller.days![tab].map((l) => l.swapDesc ? 1 : 0).reduce((a, b) => a + b) >=
-                                                _controller.days![tab].length * .5;
-
-                                            return Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                                              child: PanelBody(
-                                                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                                                child: LessonViewable(
-                                                  lesson,
-                                                  swapDesc: swapDescDay,
-                                                ),
-                                              ),
+                                          // Header
+                                          if (index == 0) {
+                                            return const Padding(
+                                              padding: EdgeInsets.only(top: 8.0, left: 24.0, right: 24.0),
+                                              child: PanelHeader(padding: EdgeInsets.only(top: 12.0)),
                                             );
-                                          },
-                                        ),
+                                          }
+
+                                          // Footer
+                                          if (index == _controller.days![tab].length + 1) {
+                                            return const Padding(
+                                              padding: EdgeInsets.only(bottom: 8.0, left: 24.0, right: 24.0),
+                                              child: PanelFooter(padding: EdgeInsets.only(top: 12.0)),
+                                            );
+                                          }
+
+                                          // Body
+                                          final Lesson lesson = _controller.days![tab][index - 1];
+                                          final bool swapDescDay = _controller.days![tab].map((l) => l.swapDesc ? 1 : 0).reduce((a, b) => a + b) >=
+                                              _controller.days![tab].length * .5;
+
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                                            child: PanelBody(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                              child: LessonViewable(
+                                                lesson,
+                                                swapDesc: swapDescDay,
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
