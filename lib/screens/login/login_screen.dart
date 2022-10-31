@@ -51,7 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
         });
       } else {
         ElegantNotification.error(
-          notificationPosition: NotificationPosition.top,
           background: Colors.white,
           description: Text(
             "schools_error".i18n,
@@ -62,7 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
           onCloseButtonPressed: () {},
           onDismiss: () {},
           onProgressFinished: () {},
-          dismissible: false,
           displayCloseButton: false,
           showProgressIndicator: false,
           autoDismiss: true,
@@ -297,7 +295,6 @@ class _LoginScreenState extends State<LoginScreen> {
         context: context,
         onLogin: (user) {
           ElegantNotification.success(
-            notificationPosition: NotificationPosition.top,
             background: Colors.white,
             description: Text(
               "welcome".i18n.fill([user.name]),
@@ -308,7 +305,6 @@ class _LoginScreenState extends State<LoginScreen> {
             onCloseButtonPressed: () {},
             onDismiss: () {},
             onProgressFinished: () {},
-            dismissible: false,
             displayCloseButton: false,
             showProgressIndicator: false,
             autoDismiss: true,
