@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:elegant_notification/elegant_notification.dart';
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
 
-    Window.getTitlebarHeight().then((value) => setState(() => topInset = value));
+    if (Platform.isMacOS) Window.getTitlebarHeight().then((value) => setState(() => topInset = value));
   }
 
   @override

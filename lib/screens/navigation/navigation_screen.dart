@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:filcnaplo/api/providers/news_provider.dart';
 import 'package:filcnaplo/api/providers/sync.dart';
 import 'package:filcnaplo/theme/colors/colors.dart';
@@ -51,12 +53,16 @@ class NavigationScreenState extends State<NavigationScreen> with WidgetsBindingO
       try {
         await Window.initialize();
       } catch (_) {}
-      topInset = await Window.getTitlebarHeight();
       // Transparent sidebar
       await Window.setEffect(effect: WindowEffect.acrylic);
-      await Window.enableFullSizeContentView();
-      await Window.hideTitle();
-      await Window.makeTitlebarTransparent();
+
+      // todo: do for windows
+      if (Platform.isMacOS) {
+        topInset = await Window.getTitlebarHeight();
+        await Window.enableFullSizeContentView();
+        await Window.hideTitle();
+        await Window.makeTitlebarTransparent();
+      }
     }();
   }
 

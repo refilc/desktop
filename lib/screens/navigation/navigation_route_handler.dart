@@ -1,9 +1,9 @@
 import 'package:animations/animations.dart';
-import 'package:filcnaplo_desktop_ui/pages/absences_page.dart';
-import 'package:filcnaplo_desktop_ui/pages/grades_page.dart';
+import 'package:filcnaplo_desktop_ui/pages/absences/absences_page.dart';
+import 'package:filcnaplo_desktop_ui/pages/grades/grades_page.dart';
 import 'package:filcnaplo_desktop_ui/pages/home/home_page.dart';
-import 'package:filcnaplo_desktop_ui/pages/messages_page.dart';
-import 'package:filcnaplo_desktop_ui/pages/timetable_page.dart';
+import 'package:filcnaplo_desktop_ui/pages/messages/messages_page.dart';
+import 'package:filcnaplo_desktop_ui/pages/timetable/timetable_page.dart';
 import 'package:flutter/material.dart';
 
 Route navigationRouteHandler(RouteSettings settings) {

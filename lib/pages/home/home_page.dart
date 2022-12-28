@@ -3,7 +3,7 @@ import 'package:filcnaplo/models/settings.dart';
 import 'package:filcnaplo/ui/date_widget.dart';
 import 'package:filcnaplo_desktop_ui/common/filter_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
+import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
 import 'package:provider/provider.dart';
 import 'package:filcnaplo/ui/filter/widgets.dart';
 import 'package:filcnaplo/ui/filter/sort.dart';
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               children: [
                 // Greeting
                 Padding(
-                  padding: const EdgeInsets.only(left: 32.0, top: 0, bottom: 12.0),
+                  padding: const EdgeInsets.only(left: 32.0, top: 24.0, bottom: 12.0),
                   child: Text(
                     greeting.i18n.fill([firstName]),
                     overflow: TextOverflow.fade,
@@ -120,6 +120,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                         listOrder[i] = currentList;
                       });
                     },
+                    disableFading: true,
                   ),
                 ),
 
