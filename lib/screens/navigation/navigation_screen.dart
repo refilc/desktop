@@ -54,7 +54,7 @@ class NavigationScreenState extends State<NavigationScreen> with WidgetsBindingO
         await Window.initialize();
       } catch (_) {}
       // Transparent sidebar
-      await Window.setEffect(effect: WindowEffect.acrylic, color: Color.fromARGB(27, 27, 27, 27));
+      await Window.setEffect(effect: WindowEffect.acrylic, color: Platform.isMacOS ? Colors.transparent : const Color.fromARGB(27, 27, 27, 27));
 
       // todo: do for windows
       if (Platform.isMacOS) {
