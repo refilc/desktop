@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:filcnaplo/api/providers/update_provider.dart';
-import 'package:filcnaplo/models/settings.dart';
 import 'package:filcnaplo_kreta_api/providers/grade_provider.dart';
 import 'package:filcnaplo/api/providers/user_provider.dart';
 import 'package:filcnaplo/theme/colors/colors.dart';
@@ -12,18 +11,15 @@ import 'package:filcnaplo_kreta_api/models/group_average.dart';
 import 'package:filcnaplo_mobile_ui/common/average_display.dart';
 import 'package:filcnaplo_mobile_ui/common/empty.dart';
 import 'package:filcnaplo_mobile_ui/common/panel/panel.dart';
-import 'package:filcnaplo_mobile_ui/common/profile_image/profile_button.dart';
-import 'package:filcnaplo_mobile_ui/common/profile_image/profile_image.dart';
 import 'package:filcnaplo_mobile_ui/common/widgets/statistics_tile.dart';
 import 'package:filcnaplo_mobile_ui/common/widgets/grade/grade_subject_tile.dart';
 import 'package:filcnaplo_mobile_ui/common/trend_display.dart';
 import 'package:filcnaplo_mobile_ui/pages/grades/fail_warning.dart';
-import 'package:filcnaplo_mobile_ui/pages/grades/grades_count.dart';
+import 'package:filcnaplo_desktop_ui/pages/grades/grades_count.dart';
 import 'package:filcnaplo_mobile_ui/pages/grades/graph.dart';
-import 'package:filcnaplo_mobile_ui/pages/grades/grade_subject_view.dart';
+import 'package:filcnaplo_desktop_ui/pages/grades/grade_subject_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:filcnaplo/utils/color.dart';
 import 'package:filcnaplo/helpers/average_helper.dart';
 import 'package:filcnaplo_premium/ui/mobile/grades/average_selector.dart';
 import 'grades_page.i18n.dart';
@@ -41,7 +37,6 @@ class _GradesPageState extends State<GradesPage> {
   late UpdateProvider updateProvider;
   late String firstName;
   late Widget yearlyGraph;
-  late Widget gradesCount;
   List<Widget> subjectTiles = [];
 
   int avgDropValue = 0;
@@ -85,10 +80,9 @@ class _GradesPageState extends State<GradesPage> {
 
     if (tiles.isNotEmpty) {
       tiles.insert(0, yearlyGraph);
-      tiles.insert(1, gradesCount);
-      tiles.insert(2, FailWarning(subjectAvgs: subjectAvgs));
-      tiles.insert(3, PanelTitle(title: Text(avgDropValue == 0 ? "Subjects".i18n : "Subjects_changes".i18n)));
-      tiles.insert(4, const PanelHeader(padding: EdgeInsets.only(top: 12.0)));
+      tiles.insert(1, FailWarning(subjectAvgs: subjectAvgs));
+      tiles.insert(2, PanelTitle(title: Text(avgDropValue == 0 ? "Subjects".i18n : "Subjects_changes".i18n)));
+      tiles.insert(3, const PanelHeader(padding: EdgeInsets.only(top: 12.0)));
       tiles.add(const PanelFooter(padding: EdgeInsets.only(bottom: 12.0)));
       tiles.add(const Padding(padding: EdgeInsets.only(bottom: 24.0)));
     } else {
@@ -119,7 +113,7 @@ class _GradesPageState extends State<GradesPage> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              value: Provider.of<SettingsProvider>(context).goodStudent ? 5.0 : subjectAvg,
+              value: subjectAvg,
             ),
           ),
           const SizedBox(width: 24.0),
@@ -199,14 +193,17 @@ class _GradesPageState extends State<GradesPage> {
         ),
         child: Container(
           padding: const EdgeInsets.only(top: 12.0, right: 12.0),
-          child: GradeGraph(graphGrades, dayThreshold: 2, classAvg: totalClassAvg),
+          child: Row(
+            children: [
+              Expanded(child: GradeGraph(graphGrades, dayThreshold: 2, classAvg: totalClassAvg)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24.0),
+                child: GradesCount(grades: graphGrades),
+              ),
+            ],
+          ),
         ),
       ),
-    );
-
-    gradesCount = Padding(
-      padding: const EdgeInsets.only(bottom: 24.0),
-      child: Panel(child: GradesCount(grades: graphGrades)),
     );
 
     generateTiles();
