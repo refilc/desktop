@@ -183,12 +183,13 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
         padding: const EdgeInsets.only(top: 11.5),
         child: CustomScrollView(
           slivers: [
-            const SliverAppBar(
+            SliverAppBar(
               pinned: true,
               floating: true,
               snap: false,
               centerTitle: false,
-              title: Text("Settings"),
+              title: const Text("Settings"),
+              surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
             ),
             SliverToBoxAdapter(
               child: AnimatedBuilder(
@@ -199,7 +200,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                     child: Column(
                       children: [
                         const SizedBox(height: 32.0),
-      
+
                         // Updates
                         if (updateProvider.available)
                           Padding(
@@ -219,7 +220,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                               ),
                             ),
                           ),
-      
+
                         // const Padding(
                         //   padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                         //   child: PremiumBannerButton(),
@@ -231,7 +232,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                               child: PremiumButton(),
                             ),
                           ),
-      
+
                         // General Settings
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -299,7 +300,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                             ),
                           ),
                         ),
-      
+
                         if (kDebugMode)
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -321,7 +322,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                               ),
                             ),
                           ),
-      
+
                         // Secret Settings
                         if (__ss)
                           Padding(
@@ -368,7 +369,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                                       activeColor: Theme.of(context).colorScheme.secondary,
                                     ),
                                   ),
-      
+
                                   // Presentation mode
                                   Material(
                                     type: MaterialType.transparency,
@@ -385,7 +386,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                               ),
                             ),
                           ),
-      
+
                         // Theme Settings
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -479,7 +480,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                             ),
                           ),
                         ),
-      
+
                         // Notifications
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -494,8 +495,9 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                                   children: [
                                     Icon(
                                       Icons.newspaper_outlined,
-                                      color:
-                                          settings.newsEnabled ? Theme.of(context).colorScheme.secondary : AppColors.of(context).text.withOpacity(.25),
+                                      color: settings.newsEnabled
+                                          ? Theme.of(context).colorScheme.secondary
+                                          : AppColors.of(context).text.withOpacity(.25),
                                     ),
                                     const SizedBox(width: 24.0),
                                     Expanded(
@@ -517,7 +519,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                             ),
                           ),
                         ),
-      
+
                         // Extras
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -558,7 +560,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                             ]),
                           ),
                         ),
-      
+
                         // About
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
@@ -693,15 +695,15 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
                                     duration: const Duration(milliseconds: 200),
                                     content: Text("You are $devmodeCountdown taps away from Developer Mode."),
                                   ));
-      
+
                                   setState(() => devmodeCountdown--);
                                 } else if (devmodeCountdown == 0) {
                                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                     content: Text("Developer Mode successfully activated."),
                                   ));
-      
+
                                   settings.update(developerMode: true);
-      
+
                                   setState(() => devmodeCountdown--);
                                 }
                               },

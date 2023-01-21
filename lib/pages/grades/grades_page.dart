@@ -220,6 +220,7 @@ class _GradesPageState extends State<GradesPage> {
               floating: false,
               snap: false,
               automaticallyImplyLeading: false,
+              surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
               title: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(

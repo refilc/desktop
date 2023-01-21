@@ -144,6 +144,7 @@ class _AbsencesPageState extends State<AbsencesPage> with TickerProviderStateMix
               centerTitle: false,
               automaticallyImplyLeading: false,
               shadowColor: Theme.of(context).shadowColor,
+              surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
               title: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(

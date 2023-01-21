@@ -60,6 +60,7 @@ class _MessagesPageState extends State<MessagesPage> with TickerProviderStateMix
               centerTitle: false,
               automaticallyImplyLeading: false,
               shadowColor: Theme.of(context).shadowColor,
+              surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
               title: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
@@ -67,12 +68,16 @@ class _MessagesPageState extends State<MessagesPage> with TickerProviderStateMix
                   style: TextStyle(color: AppColors.of(context).text, fontSize: 32.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              bottom: FilterBar(items: [
-                Tab(text: "Inbox".i18n),
-                Tab(text: "Sent".i18n),
-                Tab(text: "Trash".i18n),
-                Tab(text: "Draft".i18n),
-              ], controller: tabController, disableFading: true,),
+              bottom: FilterBar(
+                items: [
+                  Tab(text: "Inbox".i18n),
+                  Tab(text: "Sent".i18n),
+                  Tab(text: "Trash".i18n),
+                  Tab(text: "Draft".i18n),
+                ],
+                controller: tabController,
+                disableFading: true,
+              ),
             ),
           ],
           body: TabBarView(
