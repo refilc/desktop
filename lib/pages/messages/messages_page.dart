@@ -8,13 +8,10 @@ import 'package:filcnaplo/theme/colors/colors.dart';
 import 'package:filcnaplo_kreta_api/models/message.dart';
 import 'package:filcnaplo_mobile_ui/common/empty.dart';
 import 'package:filcnaplo_mobile_ui/common/filter_bar.dart';
-import 'package:filcnaplo_mobile_ui/common/profile_image/profile_button.dart';
-import 'package:filcnaplo_mobile_ui/common/profile_image/profile_image.dart';
 import 'package:filcnaplo/ui/filter/sort.dart';
 import 'package:filcnaplo_mobile_ui/common/widgets/message/message_viewable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:filcnaplo/utils/color.dart';
 import 'messages_page.i18n.dart';
 
 class MessagesPage extends StatefulWidget {

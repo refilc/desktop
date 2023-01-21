@@ -16,8 +16,6 @@ import 'package:filcnaplo_mobile_ui/common/action_button.dart';
 import 'package:filcnaplo_mobile_ui/common/empty.dart';
 import 'package:filcnaplo_mobile_ui/common/filter_bar.dart';
 import 'package:filcnaplo_mobile_ui/common/panel/panel.dart';
-import 'package:filcnaplo_mobile_ui/common/profile_image/profile_button.dart';
-import 'package:filcnaplo_mobile_ui/common/profile_image/profile_image.dart';
 import 'package:filcnaplo_mobile_ui/common/widgets/absence/absence_subject_tile.dart';
 import 'package:filcnaplo_mobile_ui/common/widgets/absence/absence_viewable.dart';
 import 'package:filcnaplo_mobile_ui/common/widgets/statistics_tile.dart';
@@ -27,7 +25,6 @@ import 'package:filcnaplo/ui/filter/sort.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:filcnaplo/utils/color.dart';
 import 'absences_page.i18n.dart';
 
 enum AbsenceFilter { absences, delays, misses }

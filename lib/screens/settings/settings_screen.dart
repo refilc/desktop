@@ -10,7 +10,6 @@ import 'package:filcnaplo_kreta_api/providers/message_provider.dart';
 import 'package:filcnaplo_kreta_api/providers/note_provider.dart';
 import 'package:filcnaplo_kreta_api/providers/timetable_provider.dart';
 import 'package:filcnaplo/api/providers/user_provider.dart';
-import 'package:filcnaplo/api/providers/database_provider.dart';
 import 'package:filcnaplo/utils/format.dart';
 import 'package:filcnaplo/models/settings.dart';
 import 'package:filcnaplo/models/user.dart';
@@ -22,7 +21,6 @@ import 'package:filcnaplo_mobile_ui/common/bottom_sheet_menu/bottom_sheet_menu_i
 import 'package:filcnaplo_mobile_ui/common/panel/panel.dart';
 import 'package:filcnaplo_mobile_ui/common/panel/panel_button.dart';
 import 'package:filcnaplo_mobile_ui/common/profile_image/profile_image.dart';
-import 'package:filcnaplo_mobile_ui/common/system_chrome.dart';
 import 'package:filcnaplo_mobile_ui/common/widgets/update/updates_view.dart';
 import 'package:filcnaplo_mobile_ui/premium/premium_button.dart';
 import 'package:filcnaplo_mobile_ui/screens/news/news_screen.dart';
@@ -31,7 +29,6 @@ import 'package:filcnaplo_mobile_ui/screens/settings/accounts/account_view.dart'
 import 'package:filcnaplo_mobile_ui/screens/settings/debug/subject_icon_gallery.dart';
 import 'package:filcnaplo_mobile_ui/screens/settings/privacy_view.dart';
 import 'package:filcnaplo_mobile_ui/screens/settings/settings_helper.dart';
-import 'package:filcnaplo_premium/models/premium_scopes.dart';
 import 'package:filcnaplo_premium/providers/premium_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -44,7 +41,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'settings_screen.i18n.dart';
 import 'package:flutter/services.dart';
 import 'package:filcnaplo_premium/ui/mobile/settings/nickname.dart';
-import 'package:filcnaplo_premium/ui/mobile/premium/premium_banner_button.dart';
 import 'package:filcnaplo_premium/ui/mobile/settings/icon_pack.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -56,7 +52,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProviderStateMixin {
   int devmodeCountdown = 3;
-  bool __ss = false; // secret settings
+  final bool __ss = false; // secret settings
 
   late UserProvider user;
   late UpdateProvider updateProvider;
