@@ -72,7 +72,7 @@ class _TimetablePageState extends State<TimetablePage> with TickerProviderStateM
   // Update timetable on user change
   Future<void> _userListener() async {
     await Provider.of<KretaClient>(context, listen: false).refreshLogin();
-    _controller.jump(_controller.currentWeek, context: context);
+    if (mounted) _controller.jump(_controller.currentWeek, context: context);
   }
 
   @override
@@ -107,12 +107,13 @@ class _TimetablePageState extends State<TimetablePage> with TickerProviderStateM
       });
     });
 
-    if (widget.initialWeek != null) {
-      _controller.jump(widget.initialWeek!, context: context, initial: true);
-    } else {
-      _controller.jump(_controller.currentWeek, context: context, initial: true, skip: true);
+    if (mounted) {
+      if (widget.initialWeek != null) {
+        _controller.jump(widget.initialWeek!, context: context, initial: true);
+      } else {
+        _controller.jump(_controller.currentWeek, context: context, initial: true, skip: true);
+      }
     }
-
     // Listen for user changes
     user = Provider.of<UserProvider>(context, listen: false);
     user.addListener(_userListener);
@@ -283,7 +284,9 @@ class _TimetablePageState extends State<TimetablePage> with TickerProviderStateM
                     borderRadius: BorderRadius.circular(6.0),
                     onTap: () => setState(() {
                       _controller.current();
-                      _controller.jump(_controller.currentWeek, context: context, loader: _controller.currentWeekId != _controller.previousWeekId);
+                      if (mounted) {
+                        _controller.jump(_controller.currentWeek, context: context, loader: _controller.currentWeekId != _controller.previousWeekId);
+                      }
                     }),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

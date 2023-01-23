@@ -65,7 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> with SingleTickerProvid
 
   Future<void> restore() => Future.wait([
         Provider.of<GradeProvider>(context, listen: false).restore(),
-        Provider.of<TimetableProvider>(context, listen: false).restore(),
+        Provider.of<TimetableProvider>(context, listen: false).restoreUser(),
         Provider.of<ExamProvider>(context, listen: false).restore(),
         Provider.of<HomeworkProvider>(context, listen: false).restore(),
         Provider.of<MessageProvider>(context, listen: false).restore(),
