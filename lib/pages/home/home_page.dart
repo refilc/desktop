@@ -3,7 +3,7 @@ import 'package:filcnaplo/models/settings.dart';
 import 'package:filcnaplo/ui/date_widget.dart';
 import 'package:filcnaplo_desktop_ui/common/filter_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:implicitly_animated_reorderable_list_2/implicitly_animated_reorderable_list_2.dart';
+import 'package:animated_list_plus/animated_list_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:filcnaplo/ui/filter/widgets.dart';
 import 'package:filcnaplo/ui/filter/sort.dart';
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24.0,
-                      color: Theme.of(context).textTheme.bodyText1?.color,
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
                     ),
                   ),
                 ),

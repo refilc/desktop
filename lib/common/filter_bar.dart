@@ -29,7 +29,7 @@ class FilterBar extends StatelessWidget implements PreferredSizeWidget {
       isScrollable: scrollable,
       physics: const BouncingScrollPhysics(),
       // Label
-      labelStyle: Theme.of(context).textTheme.subtitle2!.copyWith(
+      labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 15.0,
           ),
